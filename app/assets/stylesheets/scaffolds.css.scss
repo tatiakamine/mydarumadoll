@@ -101,9 +101,22 @@ div {
   text-align: center;
 }
 
+.text_right {
+  display: block;
+  text-align: right;
+}
+
 input[type="text"] {
   background-color: #e3ffff;
   border: 1px solid #c7ecec;
+  color: #333;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 11px;
+  height: 25px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 input[type="submit"] {
