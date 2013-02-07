@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+tati:
+    name: Tatiana Akamine
+    email: tatiana.akamine@gmail.com
+
+edna:
+    name: Edna Utima Akamine
+    email: edna.akamine@gmail.com

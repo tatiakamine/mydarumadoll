@@ -1,0 +1,14 @@
+<div id="not_footer">
+	<div id="main">
+		<img class="center" id="daruma_doll" src="/assets/darumadoll.png"/>
+		<h1>Envie um Daruma em apenas um clique:</h1>
+		<%= form_for @daruma, :url => { :action => "create" } do |daruma_form| %>
+			<label class="text_center">seu nome: <%= daruma_form.text_field :new_sender_name %></label>
+			<label class="text_center">seu email: <%= daruma_form.text_field :new_sender_email %></label>
+			<label class="text_center">email de quem vai ganhar um Daruma: <%= daruma_form.text_field :new_user_email %></label>
+			<input type="submit" value="Enviar Daruma" class="center"/> 
+		<% end %>
+	</div>
+</div>
+<div id="footer">
+</div>
