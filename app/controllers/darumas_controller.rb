@@ -13,9 +13,9 @@ class DarumasController < ApplicationController
     @daruma = Daruma.new(params[:daruma])
     @daruma.left_eye = false;
     @daruma.right_eye = false;
-
+    
     respond_to do |format|
-      if @daruma.save
+      if ((@daruma.captcha == '4') and (@daruma.save))
         DarumaMailer.create_daruma_email(@daruma.sender, @daruma.user).deliver
 #        format.html { redirect_to @daruma, notice: 'User was successfully created.' }
         format.html { render action: "sent" } #TODO ir pra uma página de verdade
