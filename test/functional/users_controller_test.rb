@@ -1,10 +1,7 @@
 require 'test_helper'
-#TODO remover pois testes não estão sendo utilizados (nem páginas para usuários serão, provavalmente)
 class UsersControllerTest < ActionController::TestCase
-  setup do
-    @user = users(:one)
-  end
 
+=begin
   test "should get index" do
     get :index
     assert_response :success
@@ -46,4 +43,5 @@ class UsersControllerTest < ActionController::TestCase
 
     assert_redirected_to users_path
   end
+=end
 end

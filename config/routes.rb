@@ -1,14 +1,10 @@
 Mydarumadoll::Application.routes.draw do
-  get "darumas/new"
-  get "darumas/sent"
-
   #TODO do we need this?
-  get "darumas/send"
+#  get "darumas/send"
 
   #TODO remove?
-  resources :users
+#  resources :users
   
-  #TODO remove?
   resources :darumas do
     resources :users
   end

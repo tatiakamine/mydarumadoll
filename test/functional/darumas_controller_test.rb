@@ -1,17 +1,18 @@
+# encoding: utf-8
 require 'test_helper'
 
 class DarumasControllerTest < ActionController::TestCase
   test "should get new" do
     get :new
     assert_response :success
-    assert_select 'h1', 'Envie um Daruma em apenas um clique:'
+    assert_select 'h1', 'Dê um Daruma de presente  pra quem você gosta!'
     assert_select 'form input' do
       assert_select "[type=text]", 3
-      assert_select "[type=submit]", 1
       assert_select "[id=daruma_new_sender_name]", 1
       assert_select "[id=daruma_new_sender_email]", 1
       assert_select "[id=daruma_new_user_email]", 1
     end
+    assert_select 'button', 'Enviar Daruma'
   end
   
   test "should create daruma" do
@@ -24,14 +25,14 @@ class DarumasControllerTest < ActionController::TestCase
     #TODO this should verify an error message in the future
     post :create
     assert_response :success
-    assert_select 'h1', 'Envie um Daruma em apenas um clique:'
+    assert_select 'h1', 'Dê um Daruma de presente  pra quem você gosta!'
     assert_select 'form input' do
       assert_select "[type=text]", 3
-      assert_select "[type=submit]", 1
       assert_select "[id=daruma_new_sender_name]", 1
       assert_select "[id=daruma_new_sender_email]", 1
       assert_select "[id=daruma_new_user_email]", 1
     end
+    assert_select 'button', 'Enviar Daruma'
   end
 
 end
