@@ -21,6 +21,11 @@ h1 {
   width: 480px;
 }
 
+#new_daruma label {
+  width: 180px;
+}
+
 #new_daruma input[type="text"] {
-  margin-right: 100px;
+  display: inline-block;
+  width: 200px;
 }

@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Daruma < ActiveRecord::Base
   attr_accessible :left_eye, :right_eye, :new_user_email, :new_sender_name, :new_sender_email, :captcha
 
@@ -14,15 +15,25 @@ class Daruma < ActiveRecord::Base
   before_validation :create_nested_user, :create_nested_sender
 
   def create_nested_user
-    logger.info "create_nested_user start"
-    create_user(:email => new_user_email) unless new_user_email.blank?
-    logger.info "create_nested_user end"
+    if (not new_user_email.blank?)
+      create_user(:email => new_user_email)
+    else
+      self.errors.add(:new_user_email, "O e-mail do presenteado é obrigatório")
+    end
   end
   
   def create_nested_sender
-    logger.info "create_nested_sender start"
-    create_sender(:name => new_sender_name, :email => new_sender_email) unless (new_sender_email.blank? or new_sender_name.blank?)
-    logger.info "create_nested_sender end"
+
+    create_sender(:name => new_sender_name, :email => new_sender_email) unless new_sender_email.blank? or new_sender_name.blank?
+
+    if (new_sender_email.blank?)
+      self.errors.add(:new_sender_email, "O seu e-mail é obrigatório")
+    end
+    
+    if (new_sender_name.blank?)
+      self.errors.add(:new_sender_name, "O seu nome é obrigatório")
+    end
+    
   end
   
 end

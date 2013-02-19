@@ -50,18 +50,20 @@ div {
 }
 
 .field_with_errors {
-  padding: 2px;
   background-color: red;
-  display: table;
+  display: inline-block;
+  margin-bottom: 4px;
+  margin-top: 4px;
+  padding: 1px;
+  
+  input[type="text"] {
+    margin: 0;
+  }
 }
 
 #error_explanation {
-  width: 450px;
-  border: 2px solid red;
-  padding: 7px;
-  padding-bottom: 0;
+  color: #f00;
   margin-bottom: 20px;
-  background-color: #f0f0f0;
   h2 {
     text-align: left;
     font-weight: bold;
@@ -71,6 +73,9 @@ div {
     margin-bottom: 0px;
     background-color: #c00;
     color: #fff;
+  }
+  p {
+    text-align: center;
   }
   ul li {
     font-size: 12px;
@@ -102,7 +107,7 @@ div {
 }
 
 .text_right {
-  display: block;
+  display: inline-block;
   text-align: right;
 }
 
@@ -148,4 +153,12 @@ button span {
 
 button:hover span {
   background: url(button_over.png) no-repeat top left;
+}
+
+.validation-error {
+  color: #f00;
+  font-size: 11px;
+  line-height: 27px;
+  margin: 5px;
+  position: absolute;
 }

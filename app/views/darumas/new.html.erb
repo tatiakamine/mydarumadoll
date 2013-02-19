@@ -3,10 +3,24 @@
 		<img class="center" id="daruma_doll" src="/assets/darumadoll.png"/>
 		<h1>Dê um Daruma de presente <br/> pra quem você gosta!</h1>
 		<%= form_for @daruma, :url => { :action => "create" }, :html => { :class => "center" } do |daruma_form| %>
-			<label class="text_right">seu nome: <%= daruma_form.text_field :new_sender_name %></label>
-			<label class="text_right">seu e-mail: <%= daruma_form.text_field :new_sender_email %></label>
-			<label class="text_right">e-mail do presenteado: <%= daruma_form.text_field :new_user_email %></label>
-			<label class="text_right">quanto é 2 + 2 ?: <%= daruma_form.text_field :captcha %></label>
+		    <% if @daruma.errors.any? %>
+				<div id="error_explanation">
+			    	<p>(Ops, tivemos uns probleminhas, corrija aí e tente de novo)</p>
+				</div>
+			<% end %>
+			
+			<%= daruma_form.label :new_sender_name, "seu nome:", :class => "text_right" %>
+			<%= daruma_form.text_field :new_sender_name %>
+			
+			<%= daruma_form.label :new_sender_email, "seu e-mail:", :class => "text_right" %>
+			<%= daruma_form.text_field :new_sender_email %>
+			
+			<%= daruma_form.label :new_user_email, "e-mail do presenteado:", :class => "text_right" %>
+			<%= daruma_form.text_field :new_user_email %>
+			
+			<%= daruma_form.label :captcha, "quanto é 2 + 2 ?:", :class => "text_right" %>
+			<%= daruma_form.text_field :captcha, :class => "text_right" %>
+			
 			<button type="submit" class="center"><span>Enviar Daruma</span></button>
 		<% end %>
 	</div>

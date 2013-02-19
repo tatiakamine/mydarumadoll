@@ -1,3 +1,4 @@
+#encoding: utf-8
 class DarumasController < ApplicationController
   # GET /darumas/new
   def new
@@ -15,16 +16,17 @@ class DarumasController < ApplicationController
     @daruma.right_eye = false;
     
     respond_to do |format|
-      if ((@daruma.captcha == '4') and (@daruma.save))
+      if (@daruma.captcha == '4') and (@daruma.save)
         DarumaMailer.create_daruma_email(@daruma.sender, @daruma.user).deliver
-#        format.html { redirect_to @daruma, notice: 'User was successfully created.' }
         format.html { render action: "sent" } #TODO ir pra uma página de verdade
+        
       else
-        logger.debug @daruma.errors #TODO nao tá logando, parece
-        format.html { render action: "new" }
+        if (@daruma.captcha != '4')
+          @daruma.errors.add(:captcha, "Essa conta está errada! Dica: a resposta é 4 :)")
+        end        
+        format.html { render action: "new" }        
       end
     end
   end
 
-  
 end
