@@ -6,6 +6,7 @@ none:
     user: edna
     sender: tati
     status: Daruma::STATUS_CREATED
+    token: 1
     
 right:
     right_eye: true
@@ -13,6 +14,7 @@ right:
     user: edna
     sender: tati
     status: Daruma::STATUS_CREATED
+    token: 2
 
 left:
     right_eye: false
@@ -20,6 +22,7 @@ left:
     user: edna
     sender: tati
     status: Daruma::STATUS_CREATED
+    token: 3
     
 both:
     right_eye: true
@@ -27,3 +30,4 @@ both:
     user: edna
     sender: tati
     status: Daruma::STATUS_CREATED
+    token: 4

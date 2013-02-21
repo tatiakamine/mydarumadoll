@@ -15,10 +15,11 @@ class DarumasController < ApplicationController
     @daruma.left_eye = false;
     @daruma.right_eye = false;
     @daruma.status = Daruma::STATUS_CREATED
+    @daruma.token = TokenSingleton.instance.generateToken
     
     respond_to do |format|
       if (@daruma.captcha == '4') and (@daruma.save)
-        DarumaMailer.create_daruma_email(@daruma.sender, @daruma.user).deliver
+        DarumaMailer.create_confirmation_email(@daruma.sender, @daruma.user, @daruma.token).deliver
         format.html { render action: "sent" } #TODO ir pra uma página de verdade
         
       else

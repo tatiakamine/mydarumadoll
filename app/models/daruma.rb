@@ -5,12 +5,12 @@ class Daruma < ActiveRecord::Base
   STATUS_SENT = 2
   ALL_DARUMA_STATUSES = [STATUS_CREATED, STATUS_SENT]
   
-  attr_accessible :left_eye, :right_eye, :new_user_email, :new_sender_name, :new_sender_email, :captcha, :status
+  attr_accessible :left_eye, :right_eye, :new_user_email, :new_sender_name, :new_sender_email, :captcha, :status, :token
 
   belongs_to :user, :inverse_of => :darumas
   belongs_to :sender, :inverse_of => :sent_darumas, :class_name => "User"
 
-  attr_accessor :new_user_email, :new_sender_name, :new_sender_email, :captcha, :status
+  attr_accessor :new_user_email, :new_sender_name, :new_sender_email, :captcha, :status, :token
 
   validates_inclusion_of :left_eye, :in => [true, false]
   validates_inclusion_of :right_eye, :in => [true, false]
@@ -18,6 +18,7 @@ class Daruma < ActiveRecord::Base
   validates :sender, :presence => "true"
   validates_inclusion_of :status, :in => ALL_DARUMA_STATUSES
   validates :status, :presence => "true"
+  validates :token, :presence => "true"
       
   before_validation :create_nested_user, :create_nested_sender
 

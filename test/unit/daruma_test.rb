@@ -8,6 +8,7 @@ class DarumaTest < ActiveSupport::TestCase
     daruma.user = users(:tati)
     daruma.sender = users(:edna)
     daruma.status = Daruma::STATUS_CREATED
+    daruma.token = TokenSingleton.instance.generateToken
     assert !daruma.save, "Saved daruma without right_eye"
   end
   
@@ -17,6 +18,7 @@ class DarumaTest < ActiveSupport::TestCase
     daruma.user = users(:tati)
     daruma.sender = users(:edna)
     daruma.status = Daruma::STATUS_CREATED
+    daruma.token = TokenSingleton.instance.generateToken
     assert !daruma.save, "Saved daruma without left_eye"
   end
   
@@ -26,6 +28,7 @@ class DarumaTest < ActiveSupport::TestCase
     daruma.right_eye = false
     daruma.sender = users(:edna)
     daruma.status = Daruma::STATUS_CREATED
+    daruma.token = TokenSingleton.instance.generateToken
     assert !daruma.save, "Saved daruma without user"
   end
     
@@ -35,6 +38,7 @@ class DarumaTest < ActiveSupport::TestCase
     daruma.right_eye = false
     daruma.user = users(:tati)
     daruma.status = Daruma::STATUS_CREATED
+    daruma.token = TokenSingleton.instance.generateToken
     assert !daruma.save, "Saved daruma without sender"
   end
   
@@ -44,7 +48,18 @@ class DarumaTest < ActiveSupport::TestCase
     daruma.right_eye = false
     daruma.user = users(:tati)
     daruma.sender = users(:edna)
+    daruma.token = TokenSingleton.instance.generateToken
     assert !daruma.save, "Saved daruma without status"
+  end
+
+  test "should not create daruma without token" do
+    daruma = Daruma.new
+    daruma.left_eye = false
+    daruma.right_eye = false
+    daruma.user = users(:tati)
+    daruma.sender = users(:edna)
+    daruma.status = Daruma::STATUS_CREATED
+    assert !daruma.save, "Saved daruma without token"
   end
     
   # UPDATE
@@ -94,6 +109,12 @@ class DarumaTest < ActiveSupport::TestCase
     daruma = Daruma.first
     daruma.status = -1
     assert !daruma.save, "Updated daruma with invalid status"
+  end
+
+  test "should not update daruma without token" do
+    daruma = Daruma.first
+    daruma.token = nil
+    assert !daruma.save, "Updated daruma without token"
   end
 
 end
