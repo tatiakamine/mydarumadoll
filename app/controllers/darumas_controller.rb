@@ -14,6 +14,7 @@ class DarumasController < ApplicationController
     @daruma = Daruma.new(params[:daruma])
     @daruma.left_eye = false;
     @daruma.right_eye = false;
+    @daruma.status = Daruma::STATUS_CREATED
     
     respond_to do |format|
       if (@daruma.captcha == '4') and (@daruma.save)

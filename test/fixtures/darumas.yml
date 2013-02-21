@@ -5,21 +5,25 @@ none:
     left_eye: false
     user: edna
     sender: tati
+    status: Daruma::STATUS_CREATED
     
 right:
     right_eye: true
     left_eye: false
     user: edna
     sender: tati
+    status: Daruma::STATUS_CREATED
 
 left:
     right_eye: false
     left_eye: true
     user: edna
     sender: tati
+    status: Daruma::STATUS_CREATED
     
 both:
     right_eye: true
     left_eye: true
     user: edna
     sender: tati
+    status: Daruma::STATUS_CREATED

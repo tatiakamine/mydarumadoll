@@ -7,6 +7,7 @@ class DarumaTest < ActiveSupport::TestCase
     daruma.left_eye = false
     daruma.user = users(:tati)
     daruma.sender = users(:edna)
+    daruma.status = Daruma::STATUS_CREATED
     assert !daruma.save, "Saved daruma without right_eye"
   end
   
@@ -15,6 +16,7 @@ class DarumaTest < ActiveSupport::TestCase
     daruma.right_eye = false
     daruma.user = users(:tati)
     daruma.sender = users(:edna)
+    daruma.status = Daruma::STATUS_CREATED
     assert !daruma.save, "Saved daruma without left_eye"
   end
   
@@ -23,6 +25,7 @@ class DarumaTest < ActiveSupport::TestCase
     daruma.left_eye = false
     daruma.right_eye = false
     daruma.sender = users(:edna)
+    daruma.status = Daruma::STATUS_CREATED
     assert !daruma.save, "Saved daruma without user"
   end
     
@@ -31,7 +34,17 @@ class DarumaTest < ActiveSupport::TestCase
     daruma.left_eye = false
     daruma.right_eye = false
     daruma.user = users(:tati)
+    daruma.status = Daruma::STATUS_CREATED
     assert !daruma.save, "Saved daruma without sender"
+  end
+  
+  test "should not create daruma without status" do
+    daruma = Daruma.new
+    daruma.left_eye = false
+    daruma.right_eye = false
+    daruma.user = users(:tati)
+    daruma.sender = users(:edna)
+    assert !daruma.save, "Saved daruma without status"
   end
     
   # UPDATE
@@ -69,6 +82,18 @@ class DarumaTest < ActiveSupport::TestCase
     daruma = Daruma.first
     daruma.sender_id = -1
     assert !daruma.save, "Updated daruma with invalid sender"
+  end
+  
+  test "should not update daruma without status" do
+    daruma = Daruma.first
+    daruma.status = nil
+    assert !daruma.save, "Updated daruma without status"
+  end
+
+  test "should not update daruma with invalid status" do
+    daruma = Daruma.first
+    daruma.status = -1
+    assert !daruma.save, "Updated daruma with invalid status"
   end
 
 end
