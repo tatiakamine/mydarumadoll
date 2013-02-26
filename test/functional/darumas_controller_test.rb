@@ -52,4 +52,16 @@ class DarumasControllerTest < ActionController::TestCase
     assert_select 'button', 'Enviar Daruma'
   end
 
+  test "should confirm daruma" do
+    get(:confirm, { 'id' => darumas(:left).id }, { 'token' => darumas(:left).token })
+    assert_response :success
+    #TODO assert_select conteúdo
+  end
+
+  test "should not confirm daruma with invalid token" do
+    get(:confirm, { 'id' => darumas(:left).id }, { 'token' => 'invalidtoken' })
+    assert_response :success
+    #TODO assert conteudo
+  end
+
 end

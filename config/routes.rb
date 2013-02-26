@@ -5,6 +5,7 @@ Mydarumadoll::Application.routes.draw do
   #TODO remove?
 #  resources :users
   
+  get "darumas/confirm"
   resources :darumas do
     resources :users
   end

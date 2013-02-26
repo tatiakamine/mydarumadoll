@@ -19,7 +19,7 @@ class DarumasController < ApplicationController
     
     respond_to do |format|
       if (@daruma.captcha == '4') and (@daruma.save)
-        DarumaMailer.create_confirmation_email(@daruma.sender, @daruma.user, @daruma.token).deliver
+        DarumaMailer.create_confirmation_email(@daruma.sender, @daruma.user, @daruma.id, @daruma.token).deliver
         format.html { render action: "sent" } #TODO ir pra uma página de verdade
         
       else
@@ -29,6 +29,29 @@ class DarumasController < ApplicationController
         format.html { render action: "new" }        
       end
     end
+  end
+
+  # GET /darumas/confirm
+  def confirm
+    @id = params[:id]
+    @token = params[:token]
+
+    @daruma = Daruma.find(@id)
+
+    respond_to do |format|
+      if @token == @daruma.token
+        if @daruma.status == Daruma::STATUS_CREATED
+          @daruma.status = Daruma::STATUS_CONFIRMED
+          @daruma.save
+        end
+        format.html { render action: "confirmed" }
+
+      else
+        @daruma.errors.add(:token, "Invalid token")
+        format.html { render action: "confirmed" }
+      end
+    end
+
   end
 
 end

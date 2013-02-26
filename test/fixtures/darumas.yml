@@ -1,33 +1,37 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 none:
+    id: 1
     right_eye: false
     left_eye: false
     user: edna
     sender: tati
     status: Daruma::STATUS_CREATED
-    token: 1
-    
+    token: bef4b669868afea6a63b709ec4b03245
+
 right:
+    id: 2
     right_eye: true
     left_eye: false
     user: edna
     sender: tati
     status: Daruma::STATUS_CREATED
-    token: 2
+    token: bef4b669868afea6a63b709ec4b03242
 
 left:
+    id: 3
     right_eye: false
     left_eye: true
     user: edna
     sender: tati
     status: Daruma::STATUS_CREATED
-    token: 3
-    
+    token: bef4b669868afea6a63b709ec4b03243
+
 both:
+    id: 4
     right_eye: true
     left_eye: true
     user: edna
     sender: tati
     status: Daruma::STATUS_CREATED
-    token: 4
+    token: bef4b669868afea6a63b709ec4b03244

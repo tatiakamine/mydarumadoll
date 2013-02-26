@@ -11,12 +11,11 @@ class DarumaMailer < ActionMailer::Base
     #TODO arrumar texto do email e criar versão TXT
   end
   
-  def create_confirmation_email(sender, user, token)
+  def create_confirmation_email(sender, user, id, token)
     @user = user
     @sender = sender
     @token = token
     mail(:to => sender.email, :subject => "Você enviou um Daruma?")
-    #TODO texto com token
   end
   
 end
