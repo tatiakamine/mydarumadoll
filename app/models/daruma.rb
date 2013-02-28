@@ -10,7 +10,7 @@ class Daruma < ActiveRecord::Base
   belongs_to :user, :inverse_of => :darumas
   belongs_to :sender, :inverse_of => :sent_darumas, :class_name => "User"
 
-  attr_accessor :new_user_email, :new_sender_name, :new_sender_email, :captcha, :status, :token
+  attr_accessor :new_user_email, :new_sender_name, :new_sender_email, :captcha
 
   validates_inclusion_of :left_eye, :in => [true, false]
   validates_inclusion_of :right_eye, :in => [true, false]

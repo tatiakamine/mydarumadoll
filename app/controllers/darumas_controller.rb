@@ -33,22 +33,23 @@ class DarumasController < ApplicationController
 
   # GET /darumas/confirm
   def confirm
-    @id = params[:id]
-    @token = params[:token]
+    id = params[:id]
+    token = params[:token]
 
-    @daruma = Daruma.find(@id)
+    @daruma = Daruma.find(id)
 
     respond_to do |format|
-      if @token == @daruma.token
+      if token == @daruma.token
         if @daruma.status == Daruma::STATUS_CREATED
-          @daruma.status = Daruma::STATUS_CONFIRMED
+          @daruma.status = Daruma::STATUS_SENT #TODO está fazendo isso? colocar em algum teste
           @daruma.save
+          DarumaMailer.create_daruma_email(@daruma.sender, @daruma.user).deliver
         end
         format.html { render action: "confirmed" }
 
       else
-        @daruma.errors.add(:token, "Invalid token")
-        format.html { render action: "confirmed" }
+        @error = "Alguma coisa deu errado ao confirmar o seu e-mail." #TODO colocar email pra contato do suporte
+        format.html { render action: "error" }
       end
     end
 
