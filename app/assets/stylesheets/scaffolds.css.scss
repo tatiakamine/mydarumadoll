@@ -124,18 +124,27 @@ input[type="text"] {
   padding-right: 5px;
 }
 
-button {
+button,
+a.button {
   background: url(button.png) no-repeat top right;
   border: 0 none;
   height: 24px;
   margin: 20px;
 }
 
-button:hover {
+a.button {
+  display: inline-block;
+  margin: 0;
+  padding-right: 10px;
+}
+
+button:hover,
+a.button:hover {
   background: url(button_over.png) no-repeat top right;
 }
 
-button span {
+button span,
+a.button span {
   background: url(button.png) no-repeat top left;
   color: #fff;
   display: block;
@@ -151,8 +160,20 @@ button span {
   text-transform: uppercase;
 }
 
-button:hover span {
+a.button span {
+  display: inline-block;
+  margin-top: 0;
+}
+
+button:hover span,
+a.button:hover span {
   background: url(button_over.png) no-repeat top left;
+}
+
+div.links {
+  margin-left: 10px;
+  margin-top: 80px;
+  text-align: center;
 }
 
 .validation-error {
