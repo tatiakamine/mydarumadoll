@@ -6,16 +6,16 @@
   <body>
     <h1>Olá!</h1>
     <p>
-      Você acabou de criar um Daruma de presente para o seu/sua amigo/amiga <%= @sender.name %>.
-      Por favor, confirme que você quer enviá-lo clicando no link abaixo:
+      Você acabou de criar um Daruma de presente para <%= @sender.name %>.
+      Por favor, confirme que você quer enviá-lo clicando no link abaixo:<br/><br/>
 
-      <a href=""></a>
+      <%= link_to url_for(:controller => "darumas", :action => "confirm", :id => @id, :token => @token, :only_path => false) ,:controller => "darumas", :action => "confirm", :id => @id, :token => @token, :only_path => false %><br/><br/>
 
-      Se não foi você que criou o Daruma, ignore este e-mail que ele não será enviado.
+      Se não foi você que criou o Daruma, basta ignorar este e-mail que ele não será enviado.<br/><br/>
 
-      Um abraço!
+      Um abraço!<br/><br/>
 
-      Equipe <a href="http://mydarumadoll.com">mydarumadoll.com</a>
+      Equipe <a href="http://mydarumadoll.com">mydarumadoll.com</a><br/>
       Fale conosco: <a href="mailto:daruma@mydarumadoll.com">daruma@mydarumadoll.com</a>
     </p>
   </body>

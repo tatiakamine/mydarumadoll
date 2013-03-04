@@ -14,6 +14,7 @@ class DarumaMailer < ActionMailer::Base
   def create_confirmation_email(sender, user, id, token)
     @user = user
     @sender = sender
+    @id = id
     @token = token
     mail(:to => sender.email, :subject => "Você enviou um Daruma?")
   end
