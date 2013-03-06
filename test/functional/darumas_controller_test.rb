@@ -17,9 +17,9 @@ class DarumasControllerTest < ActionController::TestCase
   end
   
   test "should create daruma" do
-    post :create, daruma: { new_sender_email: users(:tati).email, new_sender_name: users(:tati).name, new_user_email: users(:edna).email, captcha: 4 }
+    post :create, daruma: { new_sender_email: "michaeljfox@michaeljfox.org", new_sender_name: "Michael J. Fox", new_user_email: "listas.tati@gmail.com", captcha: 4 }
     assert_response :success
-    assert_select 'body', "Só mais uma coisinha: antes de enviar o Daruma, precisamos confirmar que você é você.Para fazer isso, basta entrar no seu e-mail (tatiana.akamine@gmail.com) e seguir as instruções.\n\n\t\tEnviar mais um Daruma"
+    assert_select 'body', "Só mais uma coisinha: antes de enviar o Daruma, precisamos confirmar que você é você.Para fazer isso, basta entrar no seu e-mail (michaeljfox@michaeljfox.org) e seguir as instruções.\n\n\t\tEnviar mais um Daruma"
   end
 
   test "should not create daruma with empty info" do
