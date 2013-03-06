@@ -6,7 +6,7 @@ none:
     left_eye: false
     user: edna
     sender: tati
-    status: Daruma::STATUS_CREATED
+    status: <%= Daruma::STATUS_CREATED %>
     token: bef4b669868afea6a63b709ec4b03245
 
 right:
@@ -15,7 +15,7 @@ right:
     left_eye: false
     user: edna
     sender: tati
-    status: Daruma::STATUS_CREATED
+    status: <%= Daruma::STATUS_CREATED %>
     token: bef4b669868afea6a63b709ec4b03242
 
 left:
@@ -24,7 +24,7 @@ left:
     left_eye: true
     user: edna
     sender: tati
-    status: Daruma::STATUS_CREATED
+    status: <%= Daruma::STATUS_CREATED %>
     token: bef4b669868afea6a63b709ec4b03243
 
 both:
@@ -33,5 +33,5 @@ both:
     left_eye: true
     user: edna
     sender: tati
-    status: Daruma::STATUS_CREATED
+    status: <%= Daruma::STATUS_CREATED %>
     token: bef4b669868afea6a63b709ec4b03244

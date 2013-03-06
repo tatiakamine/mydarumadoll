@@ -3,6 +3,13 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
   
   # CREATE
+  test "should create user" do
+    user = User.new
+    user.name = "Michael J. Fox"
+    user.email = "michaeljfox@michaeljfox.org"
+    assert user.save, "Did not create user"
+  end
+
   test "should not save user without email" do
     user = User.new
     user.name = "Michael J. Fox"
@@ -17,6 +24,11 @@ class UserTest < ActiveSupport::TestCase
   end
   
   # UPDATE
+  test "should update user" do
+    user = users(:tati)
+    assert user.save, "Did not update user"
+  end
+  
   test "should not update user without email" do
     user = users(:tati)
     user.email = nil

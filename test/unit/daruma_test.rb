@@ -2,6 +2,18 @@ require 'test_helper'
 
 class DarumaTest < ActiveSupport::TestCase
   # CREATE
+
+  test "should create daruma" do
+    daruma = Daruma.new
+    daruma.left_eye = false
+    daruma.right_eye = false
+    daruma.user = users(:tati)
+    daruma.sender = users(:edna)
+    daruma.status = Daruma::STATUS_CREATED
+    daruma.token = TokenSingleton.instance.generateToken
+    assert daruma.save, "Did not create daruma"
+  end
+
   test "should not save daruma without right_eye" do
     daruma = Daruma.new
     daruma.left_eye = false
@@ -11,7 +23,7 @@ class DarumaTest < ActiveSupport::TestCase
     daruma.token = TokenSingleton.instance.generateToken
     assert !daruma.save, "Saved daruma without right_eye"
   end
-  
+
   test "should not save daruma without left_eye" do
     daruma = Daruma.new
     daruma.right_eye = false
@@ -52,6 +64,17 @@ class DarumaTest < ActiveSupport::TestCase
     assert !daruma.save, "Saved daruma without status"
   end
 
+  test "should not create daruma with invalid status" do
+    daruma = Daruma.new
+    daruma.left_eye = false
+    daruma.right_eye = false
+    daruma.user = users(:tati)
+    daruma.sender = users(:edna)
+    daruma.status = -1
+    daruma.token = TokenSingleton.instance.generateToken
+    assert !daruma.save, "Saved daruma with invalid status"
+  end
+
   test "should not create daruma without token" do
     daruma = Daruma.new
     daruma.left_eye = false
@@ -63,6 +86,11 @@ class DarumaTest < ActiveSupport::TestCase
   end
     
   # UPDATE
+  test "should update daruma" do
+    daruma = Daruma.first
+    assert daruma.save, "Did not update daruma"
+  end
+
   test "should not update daruma without right_eye" do
     daruma = Daruma.first
     daruma.right_eye = nil

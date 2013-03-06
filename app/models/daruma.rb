@@ -12,33 +12,33 @@ class Daruma < ActiveRecord::Base
 
   attr_accessor :new_user_email, :new_sender_name, :new_sender_email, :captcha
 
-  validates_inclusion_of :left_eye, :in => [true, false]
-  validates_inclusion_of :right_eye, :in => [true, false]
-  validates :user, :presence => "true"
-  validates :sender, :presence => "true"
-  validates_inclusion_of :status, :in => ALL_DARUMA_STATUSES
-  validates :status, :presence => "true"
-  validates :token, :presence => "true"
+  validates :user_id, :sender_id, :token, :presence => true
+  validates :right_eye, :left_eye, :inclusion => { :in => [false, true], :message => "%{value} is not a valid eye value" }
+  validates :status, :inclusion => { :in => ALL_DARUMA_STATUSES, :message => "%{value} is not a valid status" }
+  validates_associated :user, :sender
       
   before_validation :create_nested_user, :create_nested_sender
 
   def create_nested_user
     if (not new_user_email.blank?)
+      #TODO find user
       create_user(:email => new_user_email)
     else
-      self.errors.add(:new_user_email, "O e-mail do presenteado é obrigatório")
+      if (user.blank?)
+        self.errors.add(:new_user_email, "O e-mail do presenteado é obrigatório")
+      end
     end
   end
   
   def create_nested_sender
-
+    #TODO find sender
     create_sender(:name => new_sender_name, :email => new_sender_email) unless new_sender_email.blank? or new_sender_name.blank?
 
-    if (new_sender_email.blank?)
+    if (new_sender_email.blank? and sender.blank?)
       self.errors.add(:new_sender_email, "O seu e-mail é obrigatório")
     end
     
-    if (new_sender_name.blank?)
+    if (new_sender_name.blank? and sender.blank?)
       self.errors.add(:new_sender_name, "O seu nome é obrigatório")
     end
     
