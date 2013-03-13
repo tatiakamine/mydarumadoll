@@ -21,8 +21,13 @@ class Daruma < ActiveRecord::Base
 
   def create_nested_user
     if (not new_user_email.blank?)
-      #TODO find user
-      create_user(:email => new_user_email)
+      users = User.where(:email => new_user_email)
+      if users.blank?
+        create_user(:email => new_user_email)
+      else
+        self.user = users[0]
+      end
+
     else
       if (user.blank?)
         self.errors.add(:new_user_email, "O e-mail do presenteado é obrigatório")
@@ -31,8 +36,12 @@ class Daruma < ActiveRecord::Base
   end
   
   def create_nested_sender
-    #TODO find sender
-    create_sender(:name => new_sender_name, :email => new_sender_email) unless new_sender_email.blank? or new_sender_name.blank?
+    senders = User.where(:email => new_sender_email)
+    if senders.blank?
+      create_sender(:name => new_sender_name, :email => new_sender_email) unless new_sender_email.blank? or new_sender_name.blank?
+    else
+      self.sender = senders[0]
+    end
 
     if (new_sender_email.blank? and sender.blank?)
       self.errors.add(:new_sender_email, "O seu e-mail é obrigatório")

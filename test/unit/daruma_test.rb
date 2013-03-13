@@ -14,6 +14,44 @@ class DarumaTest < ActiveSupport::TestCase
     assert daruma.save, "Did not create daruma"
   end
 
+  test "should create daruma, user and sender" do
+    daruma = Daruma.new
+    daruma.left_eye = false
+    daruma.right_eye = false
+    daruma.new_user_email = 'mark@facebook.com'
+    daruma.new_sender_name = 'Steve Jobs'
+    daruma.new_sender_email = 'steve@apple.com'
+    daruma.status = Daruma::STATUS_CREATED
+    daruma.token = TokenSingleton.instance.generateToken
+    assert daruma.save, "Did not create daruma with user and sender"
+    users = User.where(:email => 'mark@facebook.com')
+    assert_equal users.length, 1, "Did not create user for daruma"
+    assert_equal users[0], daruma.user, "Did not associate correct user for daruma"
+    senders = User.where(:email => 'steve@apple.com')
+    assert_equal senders.length, 1, "Did not create sender for daruma"
+    assert_equal senders[0], daruma.sender, "Did not associate correct sender for daruma"
+    users = User.all
+  end
+
+  test "should create daruma and associate existing user and sender" do
+    daruma = Daruma.new
+    daruma.left_eye = false
+    daruma.right_eye = false
+    daruma.new_user_email = 'tatiana.akamine@gmail.com'
+    daruma.new_sender_name = 'Edna Utima'
+    daruma.new_sender_email = 'edna.akamine@gmail.com'
+    daruma.status = Daruma::STATUS_CREATED
+    daruma.token = TokenSingleton.instance.generateToken
+    assert daruma.save, "Did not create daruma with existing user and sender"
+    users = User.where(:email => 'tatiana.akamine@gmail.com')
+    assert_equal users.length, 1, "Created user that already existed"
+    assert_equal users[0], daruma.user, "Did not associate correct user for daruma"
+    senders = User.where(:email => 'edna.akamine@gmail.com')
+    assert_equal senders.length, 1, "Created sender that already existed"    
+    assert_equal senders[0], daruma.sender, "Did not associate correct sender for daruma"
+  end
+
+
   test "should not save daruma without right_eye" do
     daruma = Daruma.new
     daruma.left_eye = false
@@ -84,7 +122,7 @@ class DarumaTest < ActiveSupport::TestCase
     daruma.status = Daruma::STATUS_CREATED
     assert !daruma.save, "Saved daruma without token"
   end
-    
+
   # UPDATE
   test "should update daruma" do
     daruma = Daruma.first
