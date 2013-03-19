@@ -1,11 +1,4 @@
-<div id="not_footer">
-	<div id="main">
-		<img class="center" id="daruma_doll" src="/assets/darumadoll.png"/>
+		<%= render "darumadoll" %>
 		<p class="main_text">Só mais uma coisinha: antes de enviar o Daruma, precisamos confirmar que você é você.<br/>Para fazer isso, basta entrar no seu e-mail (<%= @daruma.sender.email %>) e seguir as instruções.</p>
 
 		<div class="links"><%= link_to raw("<span>Enviar mais um Daruma</span>"), new_daruma_path, { :class=>"button" } %></div>
-
-	</div>
-</div>
-<div id="footer">
-</div>

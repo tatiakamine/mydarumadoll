@@ -1,6 +1,4 @@
-<div id="not_footer">
-	<div id="main">
-		<img class="center" id="daruma_doll" src="/assets/darumadoll.png"/>
+		<%= render "darumadoll" %>
 		<h1>Dê um Daruma de presente <br/> pra quem você gosta!</h1>
 		<%= form_for @daruma, :url => { :action => "create" }, :html => { :class => "center" } do |daruma_form| %>
 		    <% if @daruma.errors.any? %>
@@ -23,7 +21,3 @@
 			
 			<button type="submit" class="center"><span>Enviar Daruma</span></button>
 		<% end %>
-	</div>
-</div>
-<div id="footer">
-</div>
