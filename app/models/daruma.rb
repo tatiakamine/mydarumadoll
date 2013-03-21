@@ -5,7 +5,7 @@ class Daruma < ActiveRecord::Base
   STATUS_SENT = 2
   ALL_DARUMA_STATUSES = [STATUS_CREATED, STATUS_SENT]
   
-  attr_accessible :left_eye, :right_eye, :new_user_email, :new_sender_name, :new_sender_email, :captcha, :status, :token
+  attr_accessible :left_eye, :right_eye, :new_user_email, :new_sender_name, :new_sender_email, :captcha, :status, :token, :wish
 
   belongs_to :user, :inverse_of => :darumas
   belongs_to :sender, :inverse_of => :sent_darumas, :class_name => "User"

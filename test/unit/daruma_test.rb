@@ -183,4 +183,10 @@ class DarumaTest < ActiveSupport::TestCase
     assert !daruma.save, "Updated daruma without token"
   end
 
+  test "should update daruma with wish" do
+    daruma = Daruma.first
+    daruma.wish = 'I wish upon a star'
+    assert daruma.save, "Did not update daruma with wish"
+  end
+
 end

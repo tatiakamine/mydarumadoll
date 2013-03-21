@@ -59,13 +59,49 @@ class DarumasControllerTest < ActionController::TestCase
   end
 
   test "should confirm daruma" do
-    get(:confirm, { 'id' => darumas(:left).id }, { 'token' => darumas(:left).token })
+    get(:confirm, { 'id' => darumas(:controller_confirm).id }, { 'token' => darumas(:controller_confirm).token })
     assert_response :success
+    assert_select 'p', 'Olá, Tatiana Akamine!
+<br>
+Obrigado por confirmar que você é você :)
+<br>
+O Daruma que você criou foi enviado para edna.utima@gmail.com.'
     #TODO assert_select conteúdo
+  end
+
+  test "should not confirm daruma with invalid id" do
+    get(:confirm, { 'id' => 666 }, { 'token' => 'invalidtoken' })
+    assert_response :success
+    #TODO assert conteudo
   end
 
   test "should not confirm daruma with invalid token" do
     get(:confirm, { 'id' => darumas(:left).id }, { 'token' => 'invalidtoken' })
+    assert_response :success
+    #TODO assert conteudo
+  end
+
+  test "should get a daruma to make a wish" do
+    get(:makeawish, { 'id' => darumas(:makeawish).id }, { 'token' => darumas(:makeawish).token })
+    assert_response :success
+    assert_select 'p', 'Tatiana Akamine enviou um Daruma pra você.'
+    assert_select 'h1', 'Faça um pedido e pinte um olho do seu Daruma:'
+    assert_select 'form input' do
+      assert_select "[type=textarea]", 1
+      assert_select "[id=daruma_wish]", 1
+      assert_select "[type=radiobutton]", 2
+    end
+    assert_select 'button', 'OK'
+  end
+
+  test "should not get a daruma to make a wish with invalid id" do
+    get(:makeawish, { 'id' => 666 }, { 'token' => 'bef4b669868afea6a63b709ec4b03245'})
+    assert_response :success
+    #TODO assert conteudo
+  end
+
+  test "should not get a daruma to make a wish with invalid token" do
+    get(:makeawish, { 'id' => darumas(:none).id}, { 'token' => 'invalidToken'})
     assert_response :success
     #TODO assert conteudo
   end

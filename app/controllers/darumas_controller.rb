@@ -36,10 +36,10 @@ class DarumasController < ApplicationController
     id = params[:id]
     token = params[:token]
 
-    @daruma = Daruma.find(id)
+    @daruma = Daruma.find_by_id(id)
 
     respond_to do |format|
-      if token == @daruma.token
+      if (not @daruma.blank?) and (token == @daruma.token)
         if @daruma.status == Daruma::STATUS_CREATED
           @daruma.status = Daruma::STATUS_SENT #TODO está fazendo isso? colocar em algum teste
           @daruma.save
@@ -52,7 +52,23 @@ class DarumasController < ApplicationController
         format.html { render action: "error" }
       end
     end
+  end
 
+  # GET /darumas/makeawish
+  def makeawish
+    id = params[:id]
+    token = params[:token]
+
+    @daruma = Daruma.find_by_id(id)
+
+    respond_to do |format|
+      if @daruma and token == @daruma.token and @daruma.status == Daruma::STATUS_SENT #TODO testar também status
+        format.html # makeawish.html.erb
+      else
+        @error = "Alguma coisa deu errado ao buscar o seu daruma." #TODO colocar email pra contato do suporte
+        format.html { render action: "error" }
+      end
+    end
   end
 
 end

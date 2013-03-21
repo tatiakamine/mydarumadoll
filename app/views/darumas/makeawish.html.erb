@@ -1,0 +1,15 @@
+<p>Tatiana Akamine enviou um Daruma pra você.</p>
+<h1>Faça um pedido e pinte um olho do seu Daruma:</h1>
+<%= render "darumadoll" %>
+<%= form_for @daruma, :url => { :action => "create" }, :html => { :class => "center" } do |daruma_form| %>
+    <% if @daruma.errors.any? %>
+		<div id="error_explanation">
+	    	<p>(Ops, tivemos uns probleminhas, corrija aí e tente de novo)</p>
+		</div>
+	<% end %>
+			
+	<%= daruma_form.label :wish, "seu desejo:", :class => "text_right" %>
+	<%= daruma_form.text_area :wish %>
+					
+	<button type="submit" class="center"><span>OK</span></button>
+<% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130221205137) do
+ActiveRecord::Schema.define(:version => 20130321195742) do
 
   create_table "darumas", :force => true do |t|
     t.boolean  "right_eye"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20130221205137) do
     t.integer  "sender_id"
     t.integer  "status"
     t.string   "token"
+    t.string   "wish"
   end
 
   create_table "users", :force => true do |t|

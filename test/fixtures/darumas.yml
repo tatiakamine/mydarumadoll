@@ -35,3 +35,21 @@ both:
     sender: tati
     status: <%= Daruma::STATUS_CREATED %>
     token: bef4b669868afea6a63b709ec4b03244
+
+controller_confirm:
+    id: 5
+    right_eye: false
+    left_eye: false
+    user: edna
+    sender: tati
+    status: <%= Daruma::STATUS_CREATED %>
+    token: bef4b669868afea6a63b709ec4b03246
+
+makeawish:
+    id: 6
+    right_eye: false
+    left_eye: false
+    user: edna
+    sender: tati
+    status: <%= Daruma::STATUS_SENT %>
+    token: bef4b669868afea6a63b709ec4b03247

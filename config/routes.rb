@@ -6,6 +6,7 @@ Mydarumadoll::Application.routes.draw do
 #  resources :users
   
   get "darumas/confirm"
+  get "darumas/makeawish"
   resources :darumas do
     resources :users
   end
